@@ -1,0 +1,312 @@
+{
+	"name": "vscode-ssh-cluster-control",
+	"displayName": "%displayName%",
+	"description": "%description%",
+	"version": "0.0.1",
+	"publisher": "boceckts",
+	"author": "Tobias Boceck",
+	"icon": "img/cluster-control-logo.png",
+	"galleryBanner": {
+		"color": "#FFFFFF",
+		"theme": "light"
+	},
+	"license": "SEE LICENSE IN LICENSE",
+	"readme": "README.md",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/boceckts/vscode-ssh-cluster-control"
+	},
+	"bugs": "https://github.com/boceckts/vscode-ssh-cluster-control/issues",
+	"homepage": "https://github.com/boceckts/vscode-ssh-cluster-control/blob/master/README.md",
+	"engines": {
+		"vscode": "^1.44.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"keywords": [
+		"ssh",
+		"remote",
+		"cluster",
+		"ssh cluster",
+		"cluster commands"
+	],
+	"activationEvents": [
+		"onCommand:vscode-ssh-cluster-control.showClusterConfiguration",
+		"onCommand:vscode-ssh-cluster-control.executeCustomCommand",
+		"onCommand:vscode-ssh-cluster-control.executeSelectionAsCommand",
+		"onCommand:vscode-ssh-cluster-control.openTerminals",
+		"onCommand:vscode-ssh-cluster-control.shutdownCluster",
+		"onCommand:vscode-ssh-cluster-control.restartCluster",
+		"onCommand:vscode-ssh-cluster-control.showSystemInfo",
+		"onCommand:vscode-ssh-cluster-control.showHardwareInfo",
+		"onCommand:vscode-ssh-cluster-control.showProcessList",
+		"onCommand:vscode-ssh-cluster-control.showMemory",
+		"onCommand:vscode-ssh-cluster-control.showDate",
+		"onCommand:vscode-ssh-cluster-control.showPorts",
+		"onCommand:vscode-ssh-cluster-control.showWorkingDirectory",
+		"onCommand:vscode-ssh-cluster-control.showFiles",
+		"onCommand:vscode-ssh-cluster-control.showHostname",
+		"onCommand:vscode-ssh-cluster-control.showNetworkConfiguration"
+	],
+	"main": "./out/main/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "vscode-ssh-cluster-control.showClusterConfiguration",
+				"title": "%ctrl.cluster.commands.clusterConfiguration.title%"
+			},
+			{
+				"command": "vscode-ssh-cluster-control.executeSelectionAsCommand",
+				"title": "%ctrl.cluster.commands.selectedCommand.title%",
+				"when": "editorHasSelection"
+			},
+			{
+				"command": "vscode-ssh-cluster-control.executeCustomCommand",
+				"title": "%ctrl.cluster.commands.customCommand.title%"
+			},
+			{
+				"command": "vscode-ssh-cluster-control.openTerminals",
+				"title": "%ctrl.cluster.commands.openTerminals.title%"
+			},
+			{
+				"command": "vscode-ssh-cluster-control.shutdownCluster",
+				"title": "%ctrl.cluster.commands.shutdown.title%"
+			},
+			{
+				"command": "vscode-ssh-cluster-control.restartCluster",
+				"title": "%ctrl.cluster.commands.restart.title%"
+			},
+			{
+				"command": "vscode-ssh-cluster-control.showSystemInfo",
+				"title": "%ctrl.cluster.commands.systemInfo.title%"
+			},
+			{
+				"command": "vscode-ssh-cluster-control.showHardwareInfo",
+				"title": "%ctrl.cluster.commands.hardwareInfo.title%"
+			},
+			{
+				"command": "vscode-ssh-cluster-control.showProcessList",
+				"title": "%ctrl.cluster.commands.processList.title%"
+			},
+			{
+				"command": "vscode-ssh-cluster-control.showMemory",
+				"title": "%ctrl.cluster.commands.memory.title%"
+			},
+			{
+				"command": "vscode-ssh-cluster-control.showDate",
+				"title": "%ctrl.cluster.commands.date.title%"
+			},
+			{
+				"command": "vscode-ssh-cluster-control.showPorts",
+				"title": "%ctrl.cluster.commands.ports.title%"
+			},
+			{
+				"command": "vscode-ssh-cluster-control.showWorkingDirectory",
+				"title": "%ctrl.cluster.commands.workingDirectory.title%"
+			},
+			{
+				"command": "vscode-ssh-cluster-control.showFiles",
+				"title": "%ctrl.cluster.commands.listFiles.title%"
+			},
+			{
+				"command": "vscode-ssh-cluster-control.showHostname",
+				"title": "%ctrl.cluster.commands.hostname.title%"
+			},
+			{
+				"command": "vscode-ssh-cluster-control.showNetworkConfiguration",
+				"title": "%ctrl.cluster.commands.networkConfiguration.title%"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "vscode-ssh-cluster-control.executeCustomCommand",
+				"key": "alt+x"
+			},
+			{
+				"command": "vscode-ssh-cluster-control.executeSelectionAsCommand",
+				"key": "alt+shift+x"
+			}
+		],
+		"menus": {
+			"editor/context": [
+				{
+					"command": "vscode-ssh-cluster-control.executeSelectionAsCommand",
+					"when": "editorHasSelection",
+					"navigation": "commandPalette"
+				}
+			]
+		},
+		"configuration": {
+			"title": "%displayName%",
+			"properties": {
+				"ctrl.cluster.name": {
+					"type": "string",
+					"default": "My Cluster",
+					"description": "%ctrl.cluster.name.description%"
+				},
+				"ctrl.cluster.timeout": {
+					"type": "number",
+					"default": "5",
+					"description": "%ctrl.cluster.timeout.description%"
+				},
+				"ctrl.cluster.flavor": {
+					"type": "string",
+					"default": "bash",
+					"enum": [
+						"bash",
+						"cmd",
+						"pwsh"
+					],
+					"description": "%ctrl.cluster.flavor.description%"
+				},
+				"ctrl.cluster.prefix": {
+					"type": "string",
+					"default": "",
+					"description": "%ctrl.cluster.prefix.description%"
+				},
+				"ctrl.cluster.suffix": {
+					"type": "string",
+					"default": "",
+					"description": "%ctrl.cluster.suffix.description%"
+				},
+				"ctrl.cluster.hosts": {
+					"type": "array",
+					"description": "%ctrl.cluster.hosts.description%"
+				},
+				"ctrl.cluster.commands.shutdown": {
+					"type": "object",
+					"description": "%ctrl.cluster.commands.shutdown.description%",
+					"default": {
+						"bash": "sudo shutdown now",
+						"cmd": "shutdown /s /t 0",
+						"pwsh": "Stop-Computer"
+					}
+				},
+				"ctrl.cluster.commands.restart": {
+					"type": "object",
+					"description": "%ctrl.cluster.commands.restart.description%",
+					"default": {
+						"bash": "sudo shutdown -r now",
+						"cmd": "shutdown /r /t 0",
+						"pwsh": "Restart-Computer"
+					}
+				},
+				"ctrl.cluster.commands.systemInfo": {
+					"type": "object",
+					"description": "%ctrl.cluster.commands.systemInfo.description%",
+					"default": {
+						"bash": "uname -a",
+						"cmd": "ver",
+						"pwsh": "Get-CimInstance Win32_OperatingSystem"
+					}
+				},
+				"ctrl.cluster.commands.hardwareInfo": {
+					"type": "object",
+					"description": "%ctrl.cluster.commands.hardwareInfo.description%",
+					"default": {
+						"bash": "lshw",
+						"cmd": "systeminfo",
+						"pwsh": "Get-ComputerInfo"
+					}
+				},
+				"ctrl.cluster.commands.processList": {
+					"type": "object",
+					"description": "%ctrl.cluster.commands.processList.description%",
+					"default": {
+						"bash": "ps aux",
+						"cmd": "tasklist",
+						"pwsh": "Get-Process"
+					}
+				},
+				"ctrl.cluster.commands.memory": {
+					"type": "object",
+					"description": "%ctrl.cluster.commands.memory.description%",
+					"default": {
+						"bash": "free",
+						"cmd": "systeminfo | find \"\"Available Physical Memory\"\"",
+						"pwsh": "Get-CimInstance Win32_OperatingSystem | Select FreePhysicalMemory"
+					}
+				},
+				"ctrl.cluster.commands.date": {
+					"type": "object",
+					"description": "%ctrl.cluster.commands.date.description%",
+					"default": {
+						"bash": "date",
+						"cmd": "date /T",
+						"pwsh": "Get-Date"
+					}
+				},
+				"ctrl.cluster.commands.ports": {
+					"type": "object",
+					"description": "%ctrl.cluster.commands.ports.description%",
+					"default": {
+						"bash": "lsof -i",
+						"cmd": "netstat -an",
+						"pwsh": "Get-NetTCPConnection"
+					}
+				},
+				"ctrl.cluster.commands.workingDirectory": {
+					"type": "object",
+					"description": "%ctrl.cluster.commands.workingDirectory.description%",
+					"default": {
+						"bash": "pwd",
+						"cmd": "cd",
+						"pwsh": "Get-Location"
+					}
+				},
+				"ctrl.cluster.commands.listFiles": {
+					"type": "object",
+					"description": "%ctrl.cluster.commands.listFiles.description%",
+					"default": {
+						"bash": "ls -al",
+						"cmd": "dir",
+						"pwsh": "Get-ChildItem"
+					}
+				},
+				"ctrl.cluster.commands.hostname": {
+					"type": "object",
+					"description": "%ctrl.cluster.commands.hostname.description%",
+					"default": {
+						"bash": "hostname",
+						"cmd": "hostname",
+						"pwsh": "$env:computername"
+					}
+				},
+				"ctrl.cluster.commands.networkConfiguration": {
+					"type": "object",
+					"description": "%ctrl.cluster.commands.networkConfiguration.description%",
+					"default": {
+						"bash": "ip addr",
+						"cmd": "ipconfig /all",
+						"pwsh": "Get-NetIPConfiguration"
+					}
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"lint": "eslint src --ext ts",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"test": "node ./out/test/runTest.js"
+	},
+	"dependencies": {
+		"tree-kill": "^1.2.2"
+	},
+	"devDependencies": {
+		"@types/vscode": "^1.44.0",
+		"@types/glob": "^7.1.1",
+		"@types/mocha": "^7.0.2",
+		"@types/node": "^13.11.0",
+		"eslint": "^6.8.0",
+		"@typescript-eslint/parser": "^2.26.0",
+		"@typescript-eslint/eslint-plugin": "^2.26.0",
+		"glob": "^7.1.6",
+		"mocha": "^7.1.1",
+		"typescript": "^3.8.3",
+		"vscode-test": "^1.3.0"
+	}
+}
