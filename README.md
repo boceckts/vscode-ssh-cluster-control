@@ -75,7 +75,7 @@ A host is defined by:
 
 | key | type | required | description |
 |--|--|--|--|
-| `host` | `string` | yes | host address or hostname to be used for the ssh connection (ideally the same host is configured in `~/.ssh/config`) | no |
+| `host` | `string` | yes | host address or hostname to be used for the ssh connection (ideally the same host is configured in `~/.ssh/config`) |
 | `user` | `string` | no | username to be used for the ssh connection (overrides the User specified in `~/.ssh/config` if set) |
 | `identityFile` | `string` | no | identity file to be used for the ssh connection (overrides the IdentityFile specified in `~/.ssh/config` if set) |
 | `prefix` | `string` | no | set a prefix that will be prepended to every command of this particular host. |
@@ -98,7 +98,7 @@ This extension contributes the following settings:
 | `ctrl.cluster.commands.systemInfo` | <code>{<br>&nbsp;"bash": "uname -a",<br>&nbsp;"cmd": "ver",<br>&nbsp;"pwsh": "Get-CimInstance Win32_OperatingSystem"<br>}</code> | `object` | Set the *show systemInfo* command for each platform |
 | `ctrl.cluster.commands.hardwareInfo` | <code>{<br>&nbsp;"bash": "lshw",<br>&nbsp;"cmd": "systeminfo",<br>&nbsp;"pwsh": "Get-ComputerInfo"<br>}</code> | `object` | Set the *show computer info* command for each platform |
 | `ctrl.cluster.commands.processList` | <code>{<br>&nbsp;"bash": "ps aux",<br>&nbsp;"cmd": "tasklist",<br>&nbsp;"pwsh": "Get-Process"<br>}</code> | `object` | Set the *show process list* command for each platform |
-| `ctrl.cluster.commands.memory` | <code>{<br>&nbsp;"bash": "free",<br>&nbsp;"cmd": "systeminfo | find \"\"Available Physical Memory\"\"",<br>&nbsp;"pwsh": "Get-CimInstance Win32_OperatingSystem \| Select FreePhysicalMemory"<br>}</code> | `object` | Set the *show memory* command for each platform |
+| `ctrl.cluster.commands.memory` | <code>{<br>&nbsp;"bash": "free",<br>&nbsp;"cmd": "systeminfo \| find \"\"Available Physical Memory\"\"",<br>&nbsp;"pwsh": "Get-CimInstance Win32_OperatingSystem \| Select FreePhysicalMemory"<br>}</code> | `object` | Set the *show memory* command for each platform |
 | `ctrl.cluster.commands.date` | <code>{<br>&nbsp;"bash": "date",<br>&nbsp;"cmd": "date /T",<br>&nbsp;"pwsh": "Get-Date"<br>}</code> | `object` | Set the date command for each platform |
 | `ctrl.cluster.commands.ports` | <code>{<br>&nbsp;"bash": "lsof -i",<br>&nbsp;"cmd": "netstat -an",<br>&nbsp;"pwsh": "Get-NetTCPConnection"<br>}</code> | `object` | Set the *show open ports* command for each platform |
 | `ctrl.cluster.commands.workingDirectory` | <code>{<br>&nbsp;"bash": "pwd",<br>&nbsp;"cmd": "cd",<br>&nbsp;"pwsh": "Get-Location"<br>}</code> | `object` | Set the *show current directory* command for each platform |
